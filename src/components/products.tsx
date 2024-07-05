@@ -1,15 +1,19 @@
 import { ProductType } from "@/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import CustomImage from "./image";
 
 const Products = ({ product }: { product: ProductType }) => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg">
-      <img
-        className="h-40 rounded w-full object-cover object-center mb-6"
-        src="https://dummyimage.com/720x400"
-        alt="content"
-      />
+    <Link
+      href={`/product/${product?.id}`}
+      className="h-96 flex flex-col p-6 rounded-lg group hover:scale-105
+    transition-transform ease-out duration-200 border"
+    >
+      <div className="relative max-h-80 flex-1">
+        <CustomImage product={product} fill />
+      </div>
       <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
         {product?.category}
       </h3>
@@ -23,7 +27,7 @@ const Products = ({ product }: { product: ProductType }) => {
       >
         {product?.description}
       </p>
-    </div>
+    </Link>
   );
 };
 
