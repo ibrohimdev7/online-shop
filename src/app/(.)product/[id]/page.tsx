@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
+import ReactStars from "react-stars";
 import { useParams, useRouter } from "next/navigation";
 import { ProductType } from "@/interfaces";
 import { Dialog } from "@headlessui/react";
 import CustomImage from "@/components/image";
-import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/solid";
 
 function ProductDetailPage() {
   const [loading, setLoading] = useState(false);
@@ -64,32 +64,10 @@ function ProductDetailPage() {
                       <p>{product?.rating?.rate}</p>
                       {product?.rating?.rate && (
                         <div className="flex items-center ml-2 mr-6">
-                          {Array.from(
-                            {
-                              length: Math.floor(product?.rating?.rate),
-                            },
-                            (_, i) => {
-                              return (
-                                <StarIcon
-                                  key={i}
-                                  className="h-4 w-4 text-yellow-500"
-                                />
-                              );
-                            }
-                          )}
-                          {Array.from(
-                            {
-                              length: 5 - Math.floor(product?.rating?.rate),
-                            },
-                            (_, i) => {
-                              return (
-                                <StarIconOutline
-                                  key={i}
-                                  className="h-4 w-4 text-yellow-500"
-                                />
-                              );
-                            }
-                          )}
+                          <ReactStars
+                            value={product?.rating?.rate}
+                            edit={false}
+                          />
                         </div>
                       )}
                       <p className="text-blue-600 hover:underline cursor-pointer text-xs">
