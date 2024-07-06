@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ProductType } from "@/interfaces";
 import { Dialog } from "@headlessui/react";
 import CustomImage from "@/components/image";
+import { toast } from "react-toastify";
 
 function ProductDetailPage() {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,32 @@ function ProductDetailPage() {
 
   const { id } = useParams();
   const router = useRouter();
+
+  const handleClick = () => {
+    const products: ProductType[] =
+      JSON.parse(localStorage.getItem("carts") as string) || [];
+    const isExistProduct = products.find((p) => p.id === product?.id);
+
+    if (isExistProduct) {
+      const updatedProducts = products.map((p) => {
+        if (p.id === product?.id) {
+          return {
+            ...p,
+            quantity: p.quantity + 1,
+          };
+        }
+
+        return p;
+      });
+
+      localStorage.setItem("carts", JSON.stringify(updatedProducts));
+    } else {
+      const data = [...products, { ...product, quantity: 1 }];
+      localStorage.setItem("carts", JSON.stringify(data));
+    }
+
+    toast.success("Product added to bag");
+  };
 
   useEffect(() => {
     async function getData() {
@@ -82,6 +109,7 @@ function ProductDetailPage() {
                     <button
                       className="button w-full bg-blue-600 text-white border-transparent hover:border-blue-600
                       hover:bg-transparent hover:text-blue-600"
+                      onClick={handleClick}
                     >
                       Add to bag
                     </button>
