@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import Footer from "@/components/footer";
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Navbar />
         <ToastContainer />
         {children}
+        <Footer />
       </body>
     </html>
   );

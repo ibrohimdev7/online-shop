@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import ReactStars from "react-stars";
 import { useParams, useRouter } from "next/navigation";
 import { ProductType } from "@/interfaces";
-import { Dialog } from "@headlessui/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import CustomImage from "@/components/image";
 import { toast } from "react-toastify";
 
-function ProductDetailPage() {
+const ProductDetailPage = () => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<ProductType>();
   const [open, setOpen] = useState(true);
@@ -71,13 +71,13 @@ function ProductDetailPage() {
 
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4">
-          <Dialog.Panel className={"mx-auto max-w-3xl rounded bg-white p-10"}>
+          <DialogPanel className={"mx-auto max-w-3xl rounded bg-white p-10"}>
             {loading ? (
               <div className="h-8 w-8 rounded-full border-2 border-dotted border-blue-600 animate-spin"></div>
             ) : (
-              <div className="flex gap-x-8 h-96">
+              <div className="flex flex-col sm:flex-row gap-x-8 sm:h-96">
                 {product?.image && (
-                  <div className="relative w-72 h-full hidden md:inline">
+                  <div className="relative w-40 sm:w-72 h-60 sm:h-auto mx-auto">
                     <CustomImage product={product} fill />
                   </div>
                 )}
@@ -124,11 +124,11 @@ function ProductDetailPage() {
                 </div>
               </div>
             )}
-          </Dialog.Panel>
+          </DialogPanel>
         </div>
       </div>
     </Dialog>
   );
-}
+};
 
 export default ProductDetailPage;

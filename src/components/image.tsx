@@ -9,7 +9,7 @@ interface Props {
   fill?: boolean;
 }
 
-function CustomImage({ product, fill }: Props) {
+const CustomImage = ({ product, fill }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return fill ? (
