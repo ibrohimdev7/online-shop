@@ -10,7 +10,9 @@ import EmptyCart from "@/components/empty-cart";
 const ShoppingCard = () => {
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState<ProductType[]>(
-    JSON.parse(localStorage.getItem("carts") as string) || []
+    (typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("carts") as string)) ||
+      []
   );
   const removeProduct = (id: number) => {
     const updatedProducts = products.filter((p) => p.id !== id);
