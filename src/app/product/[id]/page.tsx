@@ -8,7 +8,7 @@ interface Props {
   };
 }
 
-async function ProductDetailPage({ params: { id } }: Props) {
+const ProductDetailPage = async ({ params: { id } }: Props) => {
   try {
     const res = await fetch(`
         https://fakestoreapi.com/products/${id}
@@ -37,6 +37,6 @@ async function ProductDetailPage({ params: { id } }: Props) {
   } catch (error) {
     notFound();
   }
-}
+};
 
 export default ProductDetailPage;
